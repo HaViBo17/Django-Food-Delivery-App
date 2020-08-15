@@ -1,0 +1,192 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'soul/style2.css' %}">
+        <style>
+            body{
+                position: relative;
+                
+            }
+            ul.nav-pills {
+                top: 50px;
+                position: fixed;
+                
+            }
+            div.col-8 div {
+                height: 500px;
+            }
+            .arbutton{
+                display: inline-block;
+                color: aliceblue;
+            }
+            .vdot {
+                height: 15px;
+                width: 15px;
+                background-color: rgb(57, 177, 2);
+                border-radius: 50%;
+                display: inline-block;
+            }
+            .nvdot {
+                height: 15px;
+                width: 15px;
+                background-color: rgb(233, 4, 4);
+                border-radius: 50%;
+                display: inline-block;
+            }
+            
+            @media only screen and (max-width: 600px){
+                
+            }
+            @media only screen and (max-width: 400px){
+                
+                h2{
+                    font-size:30px !important;
+                }
+                h4{
+                    font-size:20px !important ;
+                }
+                #coupon{
+                    font-size: 12px !important ;
+                }
+                #cpnbtn{
+                    font-size: 12px !important ;
+                }
+            }
+        </style>
+        <title>Bites For Bytes</title>
+        <link rel="icon" href="https://cdn0.iconfinder.com/data/icons/old-people-care-blue-line/64/32_diet-food-cafe-512.png">
+
+    </head>
+    <body data-spy="scroll" data-target="#myScrollspy" data-offset="1" style="background:linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://www.blueosa.com/wp-content/uploads/2020/01/the-best-top-10-indian-dishes.jpg') no-repeat center center /cover ; ">
+        <div class = "main-wrapper">
+            <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light sticky-top border-bottom border-dark">
+                    <a class="navbar-brand" href="{% url 'index' %}">Bites <span class="font-italic">for</span> Bytes </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        
+                        <div class="form-inline my-2 my-lg-0" style="margin-left: auto;">
+                            <div class="nav-link" >
+                                <a href="{% url 'myorders' %}">My Orders</a>
+                            </div>
+                            <div class="nav-link">
+                                <a href="{% url 'ordernow' %}">Add items</a>
+                            </div>
+                            <div class="nav-link">
+                                <a href="{% url 'validate' %}"><span class="btn-sm btn-primary">Checkout</span></a>
+                            </div>
+                        </div>
+                    </div>
+            </nav>
+            <div class = "container p-3 mt-3" style="max-width: 700px;margin:0 auto;background-color: aliceblue;">
+                <br>
+                <h2> Cart Summary</h2>
+                <br>
+                <div class = "border border-danger p-3 m-1" style="height: min-content;">
+                    <h4>
+                       
+                        
+                        Grand Total:
+
+                        <span class="float-right">&#8377; {{ user.cart.order_total.3 }}</span>
+
+                        
+                    </h4>
+                    
+                </div>
+                {% for foi in all_foi %}
+                <div class = "border border-primary p-3 m-1" style="height: min-content;">
+                    <h4>
+                        {% if foi.item_type.item_veg == 1 %}
+                            <span class = "vdot"></span>
+                        {% else %}
+                            <span class = "nvdot"></span>
+                        {% endif %}
+                        {{ foi.item_type.item_name}} ({{foi.item_quantity}})
+                        
+                        <span class="float-right">&#8377; {{ foi.cost }}</span>
+                        
+                    </h4>
+                    -------
+                    <small>
+                        <a href="{% url 'discard' foi.item_type.pk %}"><span class="border border-danger bg-danger rounded arbutton float-right" >Discard</span></a>
+                    </small>
+                </div>
+                {% endfor %}
+                <div class = "border border-warning p-3 m-1" style="height: min-content;">
+                    <h4>
+                        
+                        Total : 
+                        
+                        <span class="float-right">&#8377; {{ user.cart.order_total.0 }}</span>
+
+                        
+                        
+                    </h4>
+                    
+                </div>
+                <div class = "border border-warning p-3 m-1" style="height: min-content;">
+                    <h4>
+                        
+                        Discount : 
+                        
+                        <span class="float-right">- &#8377; {{ user.cart.order_total.1 }}</span>
+
+                        
+                        
+                    </h4>
+                    
+                </div>
+                <div class = "border border-warning p-3 m-1" style="height: min-content;">
+                    <h4>
+                        
+                        
+                        GST (5%) :
+
+                        <span class="float-right">+ &#8377; {{ user.cart.order_total.2 }}</span>
+
+                        
+                        
+                        
+                    </h4>
+                    
+                </div>
+                <div class = "border border-danger p-3 m-1" style="height: min-content;">
+                    <h4>
+                       
+                        
+                        Grand Total:
+
+                        <span class="float-right">&#8377; {{ user.cart.order_total.3 }}</span>
+
+                        
+                    </h4>
+                    
+                </div>
+                <a href="{% url 'validate' %}"><span class="btn btn-primary btn-block" style="text-align: center;">Checkout</span></a>
+                <br>
+                <span id="coupon">
+                    <span class = "text-muted"> Have a coupon code ?</span>
+                    <a href="{% url 'applycoupon' %}"><small><div class="btn btn-sm btn-secondary " id='cpnbtn'>Apply now</div></small></a>
+                </span>
+                
+            </div>
+        
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+    </body>
+</html>

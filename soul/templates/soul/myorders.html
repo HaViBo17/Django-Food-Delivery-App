@@ -1,0 +1,88 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'soul/style2.css' %}">
+        <style>
+            body{
+                position: relative;
+                
+            }
+            ul.nav-pills {
+                top: 50px;
+                position: fixed;
+                
+            }
+            div.col-8 div {
+                height: 500px;
+            }
+            @media only screen and (max-width: 400px){
+                
+                h1{
+                    font-size:30px !important;
+                }
+                h4{
+                    font-size:20px !important ;
+                }
+                .btn-primary{
+                    font-size: 12px !important ;
+                }
+            }
+        </style>
+        <title>Bites For Bytes</title>
+        <link rel="icon" href="https://cdn0.iconfinder.com/data/icons/old-people-care-blue-line/64/32_diet-food-cafe-512.png">
+
+    </head>
+    <body data-spy="scroll" data-target="#myScrollspy" data-offset="1" style="background:linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://www.blueosa.com/wp-content/uploads/2020/01/the-best-top-10-indian-dishes.jpg') no-repeat center center /cover ;min-height: 100vh; ">
+        <div class = "main-wrapper">
+            <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light sticky-top">
+                <a class="navbar-brand" href="{% url 'index' %}">Bites <span class="font-italic">for</span> Bytes </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        
+                        <div class="form-inline my-2 my-lg-0" style="margin-left: auto;">
+                            <div class="nav-link " >
+                                <a href="">Hello , {{ somename }}</a>
+                            </div>
+                            <div class="nav-link">
+                                <a href="{% url 'ordernow' %}">Order Items</a>
+                            </div>
+                            <div class="nav-link">
+                                <a href="{% url 'logout' %}">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+            </nav>
+            <div class = "container" style="max-width: 700px;margin: 0 auto ;">
+                {% for order in all_orders %}
+                <div class = "border border-primary border-rounded p-3 m-1" style="height: min-content; background-color: aliceblue;">
+                    <h4>
+                        Order ID : {{order.order_time.year }}{{order.order_time.month}}{{order.order_time.day}}{{ order.pk }}
+                        <a href="{% url 'vieworder' order.pk %}"><span class="btn btn-primary float-right">Details</span></a>
+                    </h4>
+                    <span class = "font-italic ">{{ order.get_month }} {{ order.order_time.day }} </span> <br>
+                    <span class = "disabled">Amount: &#8377; {{ order.order_total.3 }} </span>
+                    
+
+                </div>
+                {% endfor %}
+            </div>
+        
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+    </body>
+</html>

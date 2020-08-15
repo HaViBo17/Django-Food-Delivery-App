@@ -1,0 +1,82 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style>
+            .main-wrapper{
+                height:100vh;
+
+            }
+            #maintext{
+                color: aliceblue;
+            }
+            @media only screen and (max-width: 800px){
+                .display-1{
+                    font-size: 70px !important;
+                }
+                .display-2{
+                    font-size: 60px !important;
+                }
+                h3{
+                    font-size: 25px !important;
+                }
+            }
+            @media only screen and (max-width: 450px){
+                .display-1{
+                    font-size: 40px !important;
+                }
+                .display-2{
+                    font-size: 30px !important;
+                }
+                h3{
+                    font-size: 20px !important;
+                }
+                .btn{
+                    font-size: 20px !important;
+                }
+            }
+        </style>
+        <title>Bites For Bytes</title>
+        <link rel="icon" href="https://cdn0.iconfinder.com/data/icons/old-people-care-blue-line/64/32_diet-food-cafe-512.png">
+
+    </head>
+    <body>
+        <div class="main-wrapper " style="background:linear-gradient( rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25) ), url('https://www.blueosa.com/wp-content/uploads/2020/01/the-best-top-10-indian-dishes.jpg') no-repeat center center /cover ; ">
+
+            <div class="row h-100 text-center" >
+                <div class="col-sm-12 my-auto">
+                    <div class="jumbotron jumbotron-fluid" style="background: transparent;">
+                        <div class="container" id="maintext" >
+                            <h1 class="display-1">Bites <span class="font-italic display-2">for</span> Bytes</h1>   
+                            <br>   
+                            <h3>Discover the best bites of the World</h3>
+                            <br>
+                            <a href="{% url 'ordernow' %}">
+                                <button type="button" class="btn btn-outline-light btn-lg">
+                                    <strong>Order Now!</strong> 
+                                </button>
+                            </a>
+                            
+                        </div>
+                      </div>
+                </div>
+             </div>
+
+        </div>
+        
+        
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+    </body>
+</html>

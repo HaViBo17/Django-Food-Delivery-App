@@ -1,0 +1,377 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'soul/style2.css' %}">
+        <style>
+            body{
+                position: relative;
+                
+            }
+             /* ul.nav-pills {
+                top: 50px;
+                position:sticky; 
+                
+            }  */
+            div.col-8 div {
+                height: 500px;
+            }
+            .vdot {
+                height: 15px;
+                width: 15px;
+                background-color: rgb(57, 177, 2);
+                border-radius: 50%;
+                display: inline-block;
+            }
+            .nvdot {
+                height: 15px;
+                width: 15px;
+                background-color: rgb(233, 4, 4);
+                border-radius: 50%;
+                display: inline-block;
+            }
+            .star{
+                height: 15px;
+                width: 15px;
+                color: rgb(255, 174, 0);
+            }
+            .arbutton{
+                display: inline-block;
+                color: aliceblue;
+            }
+            .active{
+                background-color: white !important;
+                /* background: linear-gradient(to right, rgba(255, 255, 255, 0.5), rgba(0, 123, 255, 0.5) ) !important; */
+                color : #007BFF !important;
+                border-radius: 0 !important;
+                border: 1px solid #007BFF !important;
+            }
+            @media only screen and (max-width: 600px){
+                #myScrollspy{
+                    display: none;
+                }
+                #foodmenu{
+                    min-width: 90vw !important;
+                    margin:0  auto !important;
+                }
+            }
+            @media only screen and (max-width: 400px){
+                #foodmenu{
+                    min-width: 100vw !important;
+                    margin:0  auto !important;
+                }
+                h1{
+                    font-size:30px !important;
+                }
+                h4{
+                    font-size:20px !important ;
+                }
+                .star{
+                    height: 10px;
+                    width: 10px;
+                }
+                .rating{
+                    font-size: 12px !important ;
+                }
+            }
+        </style>
+        <title>Bites For Bytes</title>
+        <link rel="icon" href="https://cdn0.iconfinder.com/data/icons/old-people-care-blue-line/64/32_diet-food-cafe-512.png">
+
+    </head>
+    <body data-spy="scroll" data-target="#myScrollspy" data-offset="1" >
+        <div class = "main-wrapper">
+            <nav class="navbar  navbar-expand-lg navbar-light bg-light sticky-top border-bottom border-dark" style="z-index: 2000;">
+                <a class="navbar-brand" href="{% url 'index' %}">Bites <span class="font-italic">for</span> Bytes </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        
+                        <div class="form-inline my-2 my-lg-0" style="margin-left: auto;">
+                            <div class="nav-link " style="text-transform: capitalize;" >
+                                <a href="{% url 'myorders' %}">My Orders</a>
+                            </div>
+                            <div class="nav-link">
+                                <a href="{% url 'cart'%}">My Cart ({{ total }})</a>
+                            </div>
+                            <div class="nav-link">
+                                <a href="{% url 'logout'%}">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+            </nav>
+            <div class="container-fluid ">
+                <div class="row">
+                    <div class="col-sm-3 col-4 sticky-top border-right border-dark" id="myScrollspy">
+                        <ul class="nav nav-pills flex-column sticky-top" style="width: inherit;">
+                            <br>
+                            <br>
+                            <br>
+                        <li class="nav-item" >
+                            <a class="nav-link active" href="#section1">South Indian</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#section2">Snacks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#section3">Starters</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#section4">Main Course Veg</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#section5">Main Course Non-Veg</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#section6">Chinese</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#section7">Beverages</a>
+                        </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="col-sm-9 col-8" id = 'foodmenu' >
+                        <br><br><br>   
+                        
+                        <div id="section1" class="" style="height: min-content;"> 
+                            
+                            <h1>South Indian </h1>
+                            {% for something in all_food %}
+                                {% if something.item_genre == 1 %}
+                                    <div class = "border border-primary p-2 m-1" style="height: min-content;">
+                                        <h4>
+                                            {% if something.item_veg == 1%}
+                                            <span class = "vdot"></span>
+                                            {% else %}
+                                            <span class = "nvdot"></span>
+                                            {% endif %}
+                                            {{ something.item_name }}
+                                            <div style="height: min-content;display: inline-block;"><small class="border border-warning rounded p-1 rating">{{something.item_rating}}<span class = "star"> &#9733;</span>  </small></div>
+                                        </h4>
+                                        <div style="height: min-content;" class="float-right">
+                                            <a href="{% url 'add' something.pk %}"><span class="border border-primary bg-primary rounded arbutton" > Add </span></a> 
+                                            {% for foi in user_cart_items %}
+                                                {% if foi.item_type.pk == something.pk %}
+                                                    <strong>{{foi.item_quantity}}</strong>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <a href="{% url 'remove' something.pk %}"><span class="border border-danger bg-danger rounded arbutton" > Remove </span></a> 
+                                        </div>
+                                            
+                                        
+                                        <p> &#8377; {{ something.item_price }}</p>
+                                    </div>  
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div id="section2" class="" style="height: min-content;"> 
+                            <br><br><br>   
+                            <h1>Snacks </h1>
+                            {% for something in all_food %}
+                                {% if something.item_genre == 2 %}
+                                    <div class = "border border-primary p-2 m-1" style="height: min-content;">
+                                        <h4>
+                                            {% if something.item_veg == 1%}
+                                            <span class = "vdot"></span>
+                                            {% else %}
+                                            <span class = "nvdot"></span>
+                                            {% endif %}
+                                            {{ something.item_name }}
+                                            <small class="border border-warning rounded p-1 ">{{something.item_rating}}<span class = "star"> &#9733;</span>  </small>
+                                        </h4>
+                                        <div style="height: min-content;" class="float-right">
+                                            <a href="{% url 'add' something.pk %}"><span class="border border-primary bg-primary rounded arbutton" > Add </span></a> 
+                                            {% for foi in user_cart_items %}
+                                                {% if foi.item_type.pk == something.pk %}
+                                                    <strong>{{foi.item_quantity}}</strong>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <a href="{% url 'remove' something.pk %}"><span class="border border-danger bg-danger rounded arbutton" > Remove </span></a> 
+                                        </div>
+                                            
+                                        
+                                        <p> &#8377; {{ something.item_price }}</p>
+                                    </div>  
+                                {% endif %}
+                            {% endfor %}
+                        </div>       
+                        <div id="section3" class="" style="height: min-content;"> 
+                            <br><br><br>   
+                            <h1>Starters </h1>
+                            {% for something in all_food %}
+                                {% if something.item_genre == 3 %}
+                                    <div class = "border border-primary p-2 m-1" style="height: min-content;">
+                                        <h4>
+                                            {% if something.item_veg == 1%}
+                                            <span class = "vdot"></span>
+                                            {% else %}
+                                            <span class = "nvdot"></span>
+                                            {% endif %}
+                                            {{ something.item_name }}
+                                            <small class="border border-warning rounded p-1 ">{{something.item_rating}}<span class = "star"> &#9733;</span>  </small>
+                                        </h4>
+                                        <div style="height: min-content;" class="float-right">
+                                            <a href="{% url 'add' something.pk %}"><span class="border border-primary bg-primary rounded arbutton" > Add </span></a> 
+                                            {% for foi in user_cart_items %}
+                                                {% if foi.item_type.pk == something.pk %}
+                                                    <strong>{{foi.item_quantity}}</strong>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <a href="{% url 'remove' something.pk %}"><span class="border border-danger bg-danger rounded arbutton" > Remove </span></a> 
+                                        </div>
+                                            
+                                        
+                                        <p> &#8377; {{ something.item_price }}</p>
+                                    </div>  
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div id="section4" class="" style="height: min-content;"> 
+                            <br><br><br>   
+                            <h1>Main Course Veg</h1>
+                            {% for something in all_food %}
+                                {% if something.item_genre == 4 %}
+                                    <div class = "border border-primary p-2 m-1" style="height: min-content;">
+                                        <h4>
+                                            {% if something.item_veg == 1%}
+                                            <span class = "vdot"></span>
+                                            {% else %}
+                                            <span class = "nvdot"></span>
+                                            {% endif %}
+                                            {{ something.item_name }}
+                                            <small class="border border-warning rounded p-1 ">{{something.item_rating}}<span class = "star"> &#9733;</span>  </small>
+                                        </h4>
+                                        <div style="height: min-content;" class="float-right">
+                                            <a href="{% url 'add' something.pk %}"><span class="border border-primary bg-primary rounded arbutton" > Add </span></a> 
+                                            {% for foi in user_cart_items %}
+                                                {% if foi.item_type.pk == something.pk %}
+                                                    <strong>{{foi.item_quantity}}</strong>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <a href="{% url 'remove' something.pk %}"><span class="border border-danger bg-danger rounded arbutton" > Remove </span></a> 
+                                        </div>
+                                            
+                                        
+                                        <p> &#8377; {{ something.item_price }}</p>
+                                    </div>  
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div id="section5" class="" style="height: min-content;"> 
+                            <br><br><br>   
+                            <h1>Main Course Non Veg</h1>
+                            {% for something in all_food %}
+                                {% if something.item_genre == 5 %}
+                                    <div class = "border border-primary p-2 m-1" style="height: min-content;">
+                                        <h4>
+                                            {% if something.item_veg == 1%}
+                                            <span class = "vdot"></span>
+                                            {% else %}
+                                            <span class = "nvdot"></span>
+                                            {% endif %}
+                                            {{ something.item_name }}
+                                            <small class="border border-warning rounded p-1 ">{{something.item_rating}}<span class = "star"> &#9733;</span>  </small>
+                                        </h4>
+                                        <div style="height: min-content;" class="float-right">
+                                            <a href="{% url 'add' something.pk %}"><span class="border border-primary bg-primary rounded arbutton" > Add </span></a> 
+                                            {% for foi in user_cart_items %}
+                                                {% if foi.item_type.pk == something.pk %}
+                                                    <strong>{{foi.item_quantity}}</strong>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <a href="{% url 'remove' something.pk %}"><span class="border border-danger bg-danger rounded arbutton" > Remove </span></a> 
+                                        </div>
+                                            
+                                        
+                                        <p> &#8377; {{ something.item_price }}</p>
+                                    </div>  
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div id="section6" class="" style="height: min-content;"> 
+                            <br><br><br>   
+                            <h1>Chinese </h1>
+                            {% for something in all_food %}
+                                {% if something.item_genre == 6 %}
+                                    <div class = "border border-primary p-2 m-1" style="height: min-content;">
+                                        <h4>
+                                            {% if something.item_veg == 1%}
+                                            <span class = "vdot"></span>
+                                            {% else %}
+                                            <span class = "nvdot"></span>
+                                            {% endif %}
+                                            {{ something.item_name }}
+                                            <small class="border border-warning rounded p-1 ">{{something.item_rating}}<span class = "star"> &#9733;</span>  </small>
+                                        </h4>
+                                        <div style="height: min-content;" class="float-right">
+                                            <a href="{% url 'add' something.pk %}"><span class="border border-primary bg-primary rounded arbutton" > Add </span></a> 
+                                            {% for foi in user_cart_items %}
+                                                {% if foi.item_type.pk == something.pk %}
+                                                    <strong>{{foi.item_quantity}}</strong>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <a href="{% url 'remove' something.pk %}"><span class="border border-danger bg-danger rounded arbutton" > Remove </span></a> 
+                                        </div>
+                                            
+                                        
+                                        <p> &#8377; {{ something.item_price }}</p>
+                                    </div>  
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div id="section7" class="" style="height: min-content;"> 
+                            <br><br><br>   
+                            <h1>Beverages</h1>
+                            {% for something in all_food %}
+                                {% if something.item_genre == 7 %}
+                                    <div class = "border border-primary p-2 m-1" style="height: min-content;">
+                                        <h4>
+                                            {% if something.item_veg == 1%}
+                                            <span class = "vdot"></span>
+                                            {% else %}
+                                            <span class = "nvdot"></span>
+                                            {% endif %}
+                                            {{ something.item_name }}
+                                            <small class="border border-warning rounded p-1 ">{{something.item_rating}}<span class = "star"> &#9733;</span>  </small>
+                                        </h4>
+                                        <div style="height: min-content;" class="float-right">
+                                            <a href="{% url 'add' something.pk %}"><span class="border border-primary bg-primary rounded arbutton" > Add </span></a> 
+                                            {% for foi in user_cart_items %}
+                                                {% if foi.item_type.pk == something.pk %}
+                                                    <strong>{{foi.item_quantity}}</strong>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <a href="{% url 'remove' something.pk %}"><span class="border border-danger bg-danger rounded arbutton" > Remove </span></a> 
+                                        </div>
+                                            
+                                        
+                                        <p> &#8377; {{ something.item_price }}</p>
+                                    </div>  
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+              
+        </div>
+        
+        
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+    </body>
+</html>

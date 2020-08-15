@@ -1,0 +1,101 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style>
+            .main-wrapper{
+                height:100vh;
+
+            }
+            #maintext{
+                color: aliceblue;
+            }
+            @media only screen and (max-width: 500px){
+                #useraddress{
+                    width: 300px !important;
+                }
+            }
+            @media only screen and (max-width: 400px){
+                #useraddress{
+                    width: 200px !important;
+                }
+                .display-4{
+                    font-size:50px !important;
+                }
+            }
+            @media only screen and (max-width: 300px){
+                #useraddress{
+                    width: 150px !important;
+                }
+                .display-4{
+                    font-size:40px !important;
+                }
+            }
+        </style>
+        <title>Bites For Bytes</title>
+        <link rel="icon" href="https://cdn0.iconfinder.com/data/icons/old-people-care-blue-line/64/32_diet-food-cafe-512.png">
+
+    </head>
+    <body>
+        <div class="main-wrapper " >
+            
+            <div class="row h-100 text-center" >
+                
+                <div class="col-sm-12 my-auto" style="min-height:100vh;background:linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://www.blueosa.com/wp-content/uploads/2020/01/the-best-top-10-indian-dishes.jpg') no-repeat center center /cover ; ">
+                    <div class="jumbotron jumbotron-fluid" style="background: transparent;max-width: 500px;margin: 0 auto;">
+                        
+                        <div class="container border border-light p-5" id="maintext" >
+                            <h1 class="display-4">Delivery</h1>   
+                            <br>
+                            {% if messages %}
+                                {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible text-center border border-light" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!</strong> {{ message }}
+                                </div>
+                                {% endfor %}
+                            {% endif %}
+                            <h5>Confirm your address</h5>
+                            <br>
+                            
+                            <div style="text-align: center;">
+                                <h6>Address : </h6>
+                                <div class="text-wrap" style="width: 400px;margin: 0 auto;" id = "useraddress">
+                                    {{ useraddress }}
+                                </div>
+                            </div>
+                            <br>
+                            <div> Pincode : <strong>{{ userpincode }}</strong></div>
+                            <br>
+                            <a href="{% url 'placeorder' %}">
+                                <button type="button" class="btn btn-outline-light btn-lg">
+                                    <strong>Place Order</strong> 
+                                </button>
+                            </a>
+                            <br>
+                            <br>
+                            Delivery to other place ? Incorrect Location ?<br><a href="{% url 'updateaddress' %}" style="color: aqua;">Update Now</a>
+                            
+                        </div>
+                      </div>
+                </div>
+             </div>
+
+        </div>
+        
+        
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+    </body>
+</html>
